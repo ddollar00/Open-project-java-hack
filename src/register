@@ -1,0 +1,27 @@
+import java.util.*;
+
+Public class Register{
+
+public static void main (String[] args){
+String g;
+int f;
+boolean t;
+Scanner kb = new Scanner(System.in);
+  System.out.println("enter your name");
+  g = kb.nextLine();
+  
+  System.out.println("enter your age");
+  f = kb.nextInt();
+  
+   System.out.println("This is my first HacktoberFest(true/false)");
+  t=kb.nextBoolean();
+  
+  
+  if(t==false){
+  System.out.pritnln("Welcome " + g + "I hope you have a great experience at your first HacktoberFest, "+ f+ "is a great age to Start, there is no limit to when a dev should start learning and commiting to this lifestyle");
+  
+  }else{
+  System.out.println("Welcome " + g + " back to another year of HacktoberFest, Keep Grinding & growing fellow Dev" + f+ "is a great age to Start, there is no limit to when a dev should start learning and commiting to this lifestyle");
+  }
+}
+}
