@@ -1,0 +1,94 @@
+import java.io.*;
+
+ class GameEntry {
+private String name;
+private int score;
+
+public GameEntry(String n,int s){
+    name = n;
+    score= s;
+}
+   public String getName(){return name;}
+   public int getScore(){return score;}
+   
+   public String toString(){
+       return("( " + name+", "+score+" )");
+   }
+  
+}
+  class Scoreboard{
+      private int numEntries = 0;
+      private GameEntry[]board;
+      public Scoreboard(int capacity){
+          board = new GameEntry[capacity];
+      }
+      public void add(GameEntry e){
+          int newScore = e.getScore();
+          if(numEntries==0){
+              board[numEntries]=e;
+              numEntries++;
+          }
+          else{
+              int m = numEntries-1;
+              if(newScore> board[m].getScore()){
+                  int j = m;
+                  while(j>0 && board[j-1].getScore() < newScore){
+                      board[j+1] = board[j];
+                      j--;
+                  }
+              board[j+1] = board[j];
+              board[j] =e;
+              }
+          
+              else{
+                  board[numEntries]=e;
+              }
+              numEntries++;
+          }
+          System.out.println("number of players " + numEntries);
+      }
+      public GameEntry remove(int i)throws IndexOutOfBoundsException{
+          if(i<0||i>=numEntries)
+              throw new IndexOutOfBoundsException("invalid index: "+ i);
+          GameEntry temp = board[i];
+          for (int j =i;j< numEntries-1;j++)
+          board[j]=board[j+1];
+          board[numEntries-1]=null;
+          numEntries--;
+          return temp;
+      
+      }
+      public void Print(){
+          for (int i = 0;i<numEntries;i++){
+              System.out.println("Name :"+ board[i].getName()+", "+ " score = "+ board[i].getScore());
+          }
+      }
+  }
+    
+
+public class GameScore {
+
+   
+    public static void main(String[] args) {
+       Scoreboard players = new Scoreboard(10);
+       GameEntry player1 = new GameEntry("rose",590);
+       GameEntry player2 = new GameEntry("jack",510);
+       GameEntry player3 = new GameEntry("anna",660);
+       GameEntry player4 = new GameEntry("rob",750);
+       GameEntry player5 = new GameEntry("paul",720);
+       GameEntry player6 = new GameEntry("mike",1105);
+       
+       players.add(player1);
+        players.add(player2);
+         players.add(player3);
+          players.add(player4);
+           players.add(player5);
+            players.add(player6);
+            System.out.println("Print all players and their scores:");
+            players.Print();
+            players.remove(1);
+            System.out.println("After removing 2nd player in scoredboard:");
+            players.Print();
+    }
+    
+}
